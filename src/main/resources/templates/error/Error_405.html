@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://www.w3.org/1999/xhtml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Page Not Found</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
+        /* helper */
+        .center-xy {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+        }
+
+        html, body {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 16px;
+
+        }
+
+        html {
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background-color: #000;
+        }
+
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%
+
+        }
+
+        .copy-container {
+            text-align: center;
+            position: relative; /* Required for positioning the handle */
+            top: 300px;
+        }
+
+        p {
+            color: #fff;
+            font-size: 24px;
+            letter-spacing: .2px;
+            margin: 0;
+        }
+
+        .handle {
+            background: #ffe500;
+            width: 14px;
+            height: 30px;
+            top: 0;
+            left: 0;
+            margin-top: 1px;
+            position: absolute;
+        }
+
+        #cb-replay {
+            fill: #666;
+            width: 20px;
+            margin: 15px;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+            overflow: inherit;
+            cursor: pointer;
+        }
+
+        #cb-replay:hover {
+            fill: #888;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="copy-container center-xy">
+        <p>Your OTP Is Expired -> Retry :(</p>
+
+    </div>
+</div>
+
+
+
+<!-- Import GSAP and SplitText libraries from CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/SplitText.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var $copyContainer = document.querySelector(".copy-container"),
+            $replayIcon = document.getElementById('cb-replay'),
+            $copyWidth = $copyContainer.querySelector('p').offsetWidth;
+
+        var mySplitText = new SplitText($copyContainer, {type:"words"}),
+            splitTextTimeline = gsap.timeline();
+        var handleTL = gsap.timeline();
+
+        var tl = gsap.timeline();
+
+        tl.add(function(){
+            animateCopy();
+            blinkHandle();
+        }, 0.2)
+
+        function animateCopy() {
+            mySplitText.split({type:"chars, words"});
+            splitTextTimeline.staggerFrom(mySplitText.chars, 0.001, {autoAlpha:0, ease:gsap.Back.easeInOut.config(1.7)}, 0.05)
+                .add(animateHandle, 0);
+        }
+
+        function blinkHandle() {
+            handleTL.fromTo('.handle', 0.4, {autoAlpha:0}, {autoAlpha:1, repeat:-1, yoyo:true});
+        }
+
+        function animateHandle() {
+            handleTL.to('.handle', 0.7, {x:$copyWidth, ease:gsap.SteppedEase.config(12)});
+        }
+
+        $replayIcon.addEventListener('click', function(){
+            splitTextTimeline.restart();
+            handleTL.restart();
+        });
+    });
+</script>
+</body>
+</html>

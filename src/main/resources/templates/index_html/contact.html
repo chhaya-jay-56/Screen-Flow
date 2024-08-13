@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="zxx" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Screen Flow</title>
+	<!-- Template CSS -->
+	<link rel="stylesheet" href="css/style-starter.css">
+	<!-- Template CSS -->
+	<link href="//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap"
+		  rel="stylesheet">
+	<!-- Template CSS -->
+</head>
+
+<body>
+<style>
+	.navbar-brand {
+		display: flex;
+		align-items: center;
+	}
+
+	.logo {
+		width: 40px;
+		height: 40px;
+		background-image: url('images/Logo_file.png');
+		background-size: cover;
+		background-position: center;
+		right: 20px;
+		background-repeat: no-repeat;
+		margin-right: 8px; /* Adjust as needed for spacing */
+	}
+</style>
+
+<!-- header -->
+<header id="site-header" class="w3l-header fixed-top">
+	<nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
+		<div class="container">
+			<h1>
+				<a class="navbar-brand" th:href="@{/index}">
+					<div class="logo" aria-hidden="true"></div>
+					Screen Flow
+				</a>
+			</h1>
+			<button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+				<span class="fa icon-expand fa-bars"></span>
+				<span class="fa icon-close fa-times"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/index}">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/flow_card}">Flow Cards</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/search}">Search</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/genre}">Genre</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/subs}">Plans</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" th:href="@{/contact}">Contact</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/about}">About</a>
+					</li>
+				</ul>
+			</div>
+			<!-- toggle switch for light and dark theme -->
+			<div class="mobile-position">
+				<nav class="navigation">
+					<div class="theme-switch-wrapper">
+						<label class="theme-switch" for="checkbox">
+							<input type="checkbox" id="checkbox">
+							<div class="mode-container">
+								<i class="gg-sun"></i>
+								<i class="gg-moon"></i>
+							</div>
+						</label>
+					</div>
+				</nav>
+			</div>
+			<!-- //toggle switch for light and dark theme -->
+		</div>
+	</nav>
+</header>
+<!--//header-->
+
+<!--breadcrumbs -->
+<div class="w3l-breadcrumbs">
+	<nav id="breadcrumbs" class="breadcrumbs">
+		<div class="container page-wrapper">
+			<a th:href="@{/index}">Home</a> » <span class="breadcrumb_last" aria-current="page">Contact</span>
+		</div>
+	</nav>
+</div>
+<!--//breadcrumbs -->
+
+<!-- contact1 -->
+<section class="w3l-contact-1">
+	<div class="contacts-9 py-5">
+		<div class="container py-lg-4">
+			<div class="headerhny-title text-center">
+				<h4 class="sub-title text-center">Contact us</h4>
+				<h3 class="hny-title mb-0">Leave a Message</h3>
+				<p class="hny-title mb-lg-5 mb-4">If you have a question regarding our services, feel free to contact us using the form below.</p>
+			</div>
+			<div class="contact-view mt-lg-5 mt-4">
+				<div class="conhny-form-section">
+					<form th:action="@{/submit_form}" method="post" class="formhny-sec">
+						<div class="form-grids">
+							<div class="form-input">
+								<input type="text" name="name" id="w3lName" placeholder="Enter your name *" required >
+							</div>
+							<div class="form-input">
+								<input type="text" name="subject" id="w3lSubject" placeholder="Enter subject" required >
+							</div>
+							<div class="form-input">
+								<input type="email" name="sender" id="w3lSender" placeholder="Enter your email *" required >
+							</div>
+							<div class="form-input">
+								<input type="text" name="phone" id="w3lPhone" placeholder="Enter your Phone Number *" required >
+							</div>
+						</div>
+						<div class="form-input mt-4">
+							<textarea name="message" id="message" placeholder="Type your query here" required ></textarea>
+						</div>
+						<div class="submit text-right mt-4">
+							<button class="btn read-button">Submit Message</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- //contact1 -->
+
+		<!-- move top -->
+		<button onclick="topFunction()" id="movetop" title="Go to top">
+			<span class="fa fa-angle-up"></span>
+		</button>
+		<script>
+			// When the user scrolls down 20px from the top of the document, show the button
+			window.onscroll = function () {
+				scrollFunction()
+			};
+
+			function scrollFunction() {
+				if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+					document.getElementById("movetop").style.display = "block";
+				} else {
+					document.getElementById("movetop").style.display = "none";
+				}
+			}
+
+			// When the user clicks on the button, scroll to the top of the document
+			function topFunction() {
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
+			}
+		</script>
+		<!-- /move top -->
+	</section>
+</footer>
+<!--//footer-66 -->
+
+<!-- Template JavaScript -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/theme-change.js"></script>
+<script src="js/owl.carousel.js"></script>
+
+<!-- script for banner slider-->
+<script>
+	$(document).ready(function () {
+		$('.owl-one').owlCarousel({
+			loop: true,
+			margin: 0,
+			nav: false,
+			responsiveClass: true,
+			autoplay: false,
+			autoplayTimeout: 5000,
+			autoplaySpeed: 1000,
+			autoplayHoverPause: false,
+			responsive: {
+				0: {
+					items: 1,
+					nav: false
+				},
+				480: {
+					items: 1,
+					nav: false
+				},
+				667: {
+					items: 1,
+					nav: true
+				},
+				1000: {
+					items: 1,
+					nav: true
+				}
+			}
+		})
+	})
+</script>
+<!-- //script -->
+
+<!-- disable body scroll which navbar is in active -->
+<script>
+	$(function () {
+		$('.navbar-toggler').click(function () {
+			$('body').toggleClass('noscroll');
+		})
+	});
+</script>
+<!-- disable body scroll which navbar is in active -->
+
+<script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Cards Recommendation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            position: relative;
+            width: 360px;
+            height: 650px;
+        }
+
+        .card {
+            width: 380px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+
+            overflow: hidden;
+            top: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            perspective: 1000px;
+        }
+
+        .poster {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            transform-style: preserve-3d;
+            transition: transform 1.2s ease-in-out;
+            perspective: 1000px;
+        }
+
+        .poster img,
+        .poster .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+
+        .poster img {
+            object-fit: cover;
+        }
+
+        .poster .back {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            color: #000;
+            font-size: 1.5em;
+            transform: rotateY(180deg);
+
+        }
+
+        .poster .back .title {
+
+            font-size: 0.9em;
+            font-weight: 500;
+            position: absolute;
+            top: 40px;
+            left: 40px;
+        }
+
+        .poster .back .run_t {
+
+            font-size: 0.7em;
+            font-weight: 400;
+            position: absolute;
+            top: 110px;
+            left: 40px;
+        }
+
+        .poster .back .summary {
+
+            font-size: 0.7em;
+            font-weight: 400;
+            position: absolute;
+            top: 234px;
+            left: 40px;
+            width: 325px;
+        }
+
+        .poster .back .director {
+
+            font-size: 0.7em;
+            font-weight: 400;
+            position: absolute;
+            top: 195px;
+            left: 40px;
+        }
+
+        .poster .back .w_t_w {
+
+            font-size: 0.7em;
+            font-weight: 400;
+            position: absolute;
+            top: 150px;
+            left: 40px;
+        }
+
+        .poster:hover {
+            transform: rotateY(180deg);
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            background: white;
+        }
+
+        .card-title {
+            font-size: 1em;
+            font-weight: 600;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+
+        .rating {
+            font-size: 0.9em;
+            color: #ff9800;
+            font-weight: 500;
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+        }
+
+        .movie-type {
+            font-size: 1em;
+            color: #666;
+            position: absolute;
+            top: 3px;
+            margin: 5px 0 0 220px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .read-more-button {
+            font-size: 0.9em;
+            color: rgb(144, 0, 234);
+            border-color: white;
+            border: transparent;
+            cursor: pointer;
+            background: rgb(207, 253, 252);
+            border-radius: 7px;
+            position: absolute;
+            bottom: 9px;
+            right: 36px;
+            font-weight: 600;
+        }
+
+        .details {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 70px;
+            background: rgb(255, 255, 255);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .back_bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/bg.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(60%);
+            z-index: -1;
+            opacity: 0.85;
+        }
+
+        .back-button {
+    position: absolute;
+    top: 20px; /* Adjust top position as needed */
+    left: 20px; /* Adjust left position as needed */
+
+}
+
+          .back-button a {
+            display: inline-block;
+            outline: none;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1;
+            border-radius: 500px;
+            transition-property: background-color, color, box-shadow, filter;
+            transition-duration: 0.3s;
+            border-color: white;
+            border: 1px solid transparent;
+            letter-spacing: 2px;
+            min-width: 160px;
+            text-transform: uppercase;
+            white-space: normal;
+            font-weight: 900;
+            text-align: center;
+            padding: 16px 14px 18px;
+            color: white;
+            box-shadow: inset 0 0 0 2px #616467;
+            background-color: black;
+            height: 48px;
+            text-decoration: none; /* Remove underline */
+        }
+
+        .back-button a:hover {
+            color: black;
+            background-color: white;
+            text-decoration: none; /* Remove underline on hover */
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+<div class="back-button">
+    <a th:href="@{/index}">Back</a>
+</div>
+
+    <img class="back_bg">
+</div>
+<div class="container">
+    <div class="card-deck" id="movie-cards">
+        <!-- Cards will be dynamically added here by JavaScript -->
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+<script>
+    const movies = [
+        {
+            title: 'Kalki 2898 AD (2024)',
+            poster: 'images/kalki.jpeg',
+            rating: '4.3',
+            type: 'Sci-Fi / Action',
+            director: 'Nag Ashwin',
+            r_time: '3h 1m',
+            summary: 'When the world is taken over by darkness. A force will rise.',
+            trailer: 'https://youtu.be/kQDd1AhGIHk?si=xzWrRJIgXfLFdeHq',
+        },
+        {
+            title: 'Knives Out (2019)',
+            poster: 'images/knives_out.jpg',
+            rating: '4.8',
+            type: 'Mystery / Thriller',
+            director: 'Rian Johnson',
+            r_time: '2h 10m',
+            summary: 'A detective investigates the death of a patriarch of an eccentric, combative family.',
+            trailer: 'https://youtu.be/qGqiHJTsRkQ',
+        },
+        {
+            title: 'Glass Onion (2022)',
+            poster: 'images/g_o.jpg',
+            rating: '4.4',
+            type: 'Mystery / Thriller',
+            director: 'Rian Johnson',
+            r_time: '2h 19m',
+            summary: 'Detective Benoit Blanc travels to Greece to peel back the layers of a mystery involving a new cast of suspects.',
+            trailer: 'https://youtu.be/oj_0dWuN-FA',
+        },
+        {
+            title: 'John Wick Ch-4 (2023)',
+            poster: 'images/jhon_wick.jpg',
+            rating: '4.6',
+            type: 'Action / Thriller',
+            director: 'Chad Stahelski',
+            r_time: '2h 49m',
+            summary: 'John Wick uncovers a path to defeating The High Table.',
+            trailer: 'https://youtu.be/qEVUtrk8_B4',
+        },
+        {
+            title: 'M3GAN (2022)',
+            poster: 'images/megan.jpeg',
+            rating: '4.5',
+            type: 'Sci-Fi / Horror',
+            director: 'Gerard Johnstone',
+            r_time: '1h 42m',
+            summary: 'A robotics engineer at a toy company builds a life-like doll that begins to take on a life of its own.',
+            trailer: 'https://youtu.be/BRb4U99OU80',
+        },
+        {
+            title: 'Shaitaan (2024)',
+            poster: 'images/shaitaan.jpeg',
+            rating: '4.5',
+            type: 'Mystery / Horror',
+            director: 'Vikas Bahl',
+            r_time: '2h 15m',
+            summary: 'A chilling tale of a detective haunted by the demon of his past cases.',
+            trailer: 'https://youtu.be/DJh6V1rKJvA',
+        },
+        {
+            title: 'No Time To Die (2021)',
+            poster: 'images/no_time.jpg',
+            rating: '4.3',
+            type: 'Action / Thriller',
+            director: 'Cary Joji Fukunaga',
+            r_time: '2h 43m',
+            summary: 'James Bond has left active service. His peace is short-lived when Felix Leiter, an old friend from the CIA, turns up asking for help.',
+            trailer: 'https://youtu.be/BIhNsAtPbPI',
+        },
+        {
+            title: 'Prestige (2006)',
+            poster: 'images/p_r.jpg',
+            rating: '4.7',
+            type: 'Mystery / Thriller',
+            director: 'Christopher Nolan',
+            r_time: '2h 10m',
+            summary: 'After a tragic accident, two stage magicians engage in a battle to create the ultimate illusion while sacrificing everything they have to outwit each other.',
+            trailer: 'https://youtu.be/ijXruSzfGEc',
+        },
+        {
+            title: 'Your Name (2016)',
+            poster: 'images/your_name.jpg',
+            rating: '4.8',
+            type: 'Adventure/Thriller',
+            director: 'Makoto Shinkai',
+            r_time: '1h 46m',
+            summary: 'Two teenagers share a profound, magical connection upon discovering they are swapping bodies.',
+            trailer: 'https://youtu.be/xU47nhruN-Q',
+        },
+        {
+            title: 'Sita Ramam (2022)',
+            poster: 'images/sita_ramam.jpg',
+            rating: '4.9',
+            type: 'Romance',
+            director: 'Hanu Raghavapudi',
+            r_time: '2h 38m',
+            summary: 'An epic love story spanning decades, connecting two souls across time and space.',
+            trailer: 'https://youtu.be/xEXU4h42Y1M',
+        },
+    ];
+
+    const container = document.getElementById('movie-cards');
+
+    movies.forEach((movie, index) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.style.zIndex = movies.length - index;
+        card.innerHTML = `
+            <div class="poster">
+                <img src="${movie.poster}" alt="Movie Poster">
+                <div class="back">
+                    <div class="title">${movie.title}</div>
+                    <div class="run_t">Run Time - ${movie.r_time}</div>
+                    <div class ="director">Directed By ${movie.director}</div>
+                    <div class="w_t_w">Where to Watch - Available on Netflix</div>
+                    <div class="summary">Summary - ${movie.summary}</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="details">
+                    <div class="card-title">${movie.title}</div>
+                    <div class="rating">
+                        ⭐ ${movie.rating || 'N/A'}
+                    </div>
+                    <div class="movie-type">${movie.type}</div>
+                    <button class="read-more-button" onclick="window.open('${movie.trailer}', '_blank')">Watch Trailer</button>
+                </div>
+            </div>
+        `;
+        container.appendChild(card);
+
+        // Initialize Hammer.js on each card
+        const hammertime = new Hammer(card);
+        hammertime.on('pan', (event) => {
+            card.style.transform = `translate(${event.deltaX}px, ${event.deltaY}px) rotate(${event.deltaX * 0.05}deg)`;
+            card.style.opacity = 1 - Math.abs(event.deltaX) / 600;
+        });
+
+    hammertime.on('panend', (event) => {
+    if (Math.abs(event.deltaX) > 100) {
+        card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+        card.style.transform = `translate(${event.deltaX * 3}px, ${event.deltaY * 3}px) rotate(${event.deltaX * 0.05}deg)`;
+        card.style.opacity = 0;
+
+        if (event.deltaX > 0) { // Right swipe
+            // Store the movie name when swiped right
+            fetch('/store_movie', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ movieName: movie.title })
+            });
+        }
+
+        setTimeout(() => {
+            card.remove();
+        }, 300);
+    } else {
+        card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+        card.style.transform = 'translate(0, 0) rotate(0)';
+        card.style.opacity = 1;
+    }
+});
+
+    });
+</script>
+</body>
+
+</html>

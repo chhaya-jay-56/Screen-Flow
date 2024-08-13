@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+
+    <title>Sign Up Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #6ab1d7, #33d9b2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 85vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 390px; /* Reduced width */
+            max-width: 100%;
+            margin: 80px 0 0 0;
+        }
+        .form-container {
+            padding: 20px; /* Reduced padding */
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            position: relative;
+            margin-bottom: 22px; /* Reduced margin */
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 8px 0; /* Adjusted padding */
+            border: none;
+            border-bottom: 2px solid #adadad;
+            background: none;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .input-group label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 6px 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        .input-group input:focus ~ label,
+        .input-group input:valid ~ label {
+            top: -20px;
+            left: 0;
+            color: #5264ae;
+            font-size: 12px;
+        }
+        .input-group input:focus,
+        .input-group input:valid {
+            border-bottom: 2px solid #5264ae;
+        }
+        .btn {
+            width: 100%;
+            padding: 8px; /* Reduced padding */
+            background: #33d9b2;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 14px; /* Reduced font size */
+            color: white;
+            border-radius: 13px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: #2bbbad;
+        }
+        .form-footer {
+            text-align: center;
+            margin-top: 15px; /* Reduced margin */
+        }
+        .form-footer a {
+            color: #5264ae;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+        .file-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px; /* Reduced margin */
+        }
+        .upload-icon {
+            width: 80px; /* Reduced size */
+            height: 80px; /* Reduced size */
+            border: 2px dashed black;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            overflow: hidden; /* Added to prevent overflow */
+        }
+        .upload-icon .lnr {
+            font-size: 32px;
+            color: grey;
+            position: absolute;
+            z-index: 1;
+        }
+        .upload-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            display: none; /* Hidden by default */
+        }
+        .file-input {
+            display: none;
+            height: 70px;
+            width: 70px:
+            border-radius: 50%;
+        }
+        .file-name {
+            font-size: 12px; /* Reduced font size */
+            color: #555555;
+            margin-top: 5px; /* Reduced margin */
+            text-align: center;
+        }
+        .upload-label {
+            font-size: 14px; /* Added label */
+            color: #5264ae;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container fade-in">
+    <div class="form-container">
+        <form th:action="@{/save_user_data}" th:object="${UserData}" method="POST"  id="signupForm">
+            <h2>Sign Up</h2>
+            <div class="input-group">
+                <input type="text" id="name" th:field="*{name}" required>
+                <label for="name">Name</label>
+            </div>
+            <div class="input-group">
+                <input type="email" id="email" th:field="*{email}" required>
+                <label for="email">Email</label>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" th:field="*{password}" required>
+                <label for="password">Password</label>
+            </div>
+            <div class="input-group">
+                <input type="number" id="age" th:field="*{age}" required>
+                <label for="age">Age</label>
+            </div>
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+        <div class="form-footer">
+            <p>Already have an account? <a th:href="@{/log_in}">Login here</a></p>
+        </div>
+    </div>
+</div>
+<script>
+    function showFileName() {
+        const input = document.getElementById('image');
+        const file = input.files[0];
+        const fileName = file ? file.name : 'No file chosen';
+        document.getElementById('file-name').textContent = fileName;
+
+        // Display selected image as profile picture
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const profileImage = document.getElementById('profileImage');
+                profileImage.src = e.target.result;
+                profileImage.style.display = 'block';
+                document.querySelector('.lnr-cloud-upload').style.display = 'none';
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+</body>
+</html>

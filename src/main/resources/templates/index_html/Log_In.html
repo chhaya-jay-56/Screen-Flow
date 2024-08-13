@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #6ab1d7, #33d9b2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 400px;
+            max-width: 100%;
+        }
+        .form-container {
+            padding: 30px;
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        .input-group input {
+            width: 96%;
+            padding: 10px 10px 10px 0;
+            border: none;
+            border-bottom: 2px solid #adadad;
+            background: none;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .input-group label {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            padding: 6px 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        .input-group input:focus ~ label,
+        .input-group input:valid ~ label {
+            top: -20px;
+            left: 0;
+            color: #5264ae;
+            font-size: 12px;
+        }
+        .input-group input:focus,
+        .input-group input:valid {
+            border-bottom: 2px solid #5264ae;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: #33d9b2;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+            border-radius: 13px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: #2bbbad;
+        }
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .form-footer a {
+            color: #5264ae;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container fade-in">
+    <div class="form-container">
+        <form th:action="@{/save_3}" th:object="${CompareData}" method="POST" id="loginForm">
+            <h2>Login</h2>
+            <div class="input-group">
+                <input type="email" id="email" name="email" required th:field="*{email}">
+                <label for="email">Email</label>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" name="password" required th:field="*{password}">
+                <label for="password">Password</label>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <div class="form-footer">
+            <p>Don't have an account? <a th:href="@{/sign_up}">Sign up here</a></p>
+        </div>
+    </div>
+</div>
+<script>
+    const inputs = document.querySelectorAll('.input-group input');
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            input.parentNode.classList.add('active');
+        });
+        input.addEventListener('blur', () => {
+            if (input.value === '') {
+                input.parentNode.classList.remove('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #6ab1d7, #33d9b2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 400px;
+            max-width: 100%;
+        }
+        .form-container {
+            padding: 30px;
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        .input-group input {
+            width: 96%;
+            padding: 10px 10px 10px 0;
+            border: none;
+            border-bottom: 2px solid #adadad;
+            background: none;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .input-group label {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            padding: 10px 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        .input-group input:focus ~ label,
+        .input-group input:valid ~ label {
+            top: 5px;
+            left: 0;
+            color: #5264ae;
+            font-size: 12px;
+        }
+        .input-group input:focus,
+        .input-group input:valid {
+            border-bottom: 2px solid #5264ae;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: #33d9b2;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: #2bbbad;
+        }
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .form-footer a {
+            color: #5264ae;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container fade-in">
+    <div class="form-container">
+        <form id="otpForm" method="POST" th:action="@{/verify_otp}">
+            <h2>OTP Verification</h2>
+            <div class="input-group">
+            <input type="email" name="email" required placeholder="email">
+            </div>
+            <div class="input-group">
+                <input type="text" id="otp" name="otp" required placeholder="Enter OTP">
+            </div>
+            <button type="submit" class="btn">Verify OTP</button>
+        </form>
+    </div>
+</div>
+<script>
+    document.getElementById('resendOtpLink').addEventListener('click', function(event) {
+        event.preventDefault();
+        const email = document.querySelector('input[name="email"]').value;
+
+        fetch('/resend_otp', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: email })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('OTP has been resent to your email.');
+            } else {
+                alert('Failed to resend OTP.');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
+</body>
+</html>

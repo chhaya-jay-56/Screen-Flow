@@ -1,0 +1,391 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+-->
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Collective Admin Panel a Flat Bootstrap Responsive Website Template | Forms :: W3Layouts</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- Template CSS -->
+  <link rel="stylesheet" href="admin_css/css/style-starter.css">
+
+  <!-- google fonts -->
+  <link href="//fonts.googleapis.com/css?family=Nunito:300,400,600,700,800,900&display=swap" rel="stylesheet">
+</head>
+
+<div class="se-pre-con"></div>
+<body>
+
+<style>
+    body {
+        font-family: "Poppins";
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 80%;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .custom-table thead {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .custom-table th, .custom-table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .custom-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .custom-table tr:hover {
+        background-color: #e9ecef;
+    }
+
+    .btn-danger {
+        padding: 5px 10px;
+        color: #fff;
+        background-color: #dc3545;
+        border: none;
+        border-radius: 3px;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+</style>
+<section>
+    <!-- sidebar menu start -->
+    <div class="sidebar-menu sticky-sidebar-menu">
+
+        <!-- logo start -->
+        <div class="logo">
+            <h1><a th:href="@{/index_2}">Admin Panel</a></h1>
+        </div>
+
+        <!-- logo start -->
+
+        <!-- //logo end -->
+
+        <div class="sidebar-menu-inner">
+
+            <!-- sidebar nav start -->
+            <ul class="nav nav-pills nav-stacked custom-nav">
+                <li><a th:href="@{/index_2}"><i class="lnr lnr-menu-circle"></i><span> Dashboard</span></a>
+                </li>
+
+                <li><a th:href="@{/pricing}"><i class="lnr lnr-text-align-justify"></i> <span>Pricing tables</span></a></li>
+                <li><a th:href="@{/forms}"><i class="lnr lnr-smartphone"></i><span>Forms</span></a></li>
+            </ul>
+            <!-- //sidebar nav end -->
+            <!-- toggle button start -->
+            <a class="toggle-btn">
+                <i class="lnr lnr-arrow-right-circle"></i>
+
+            </a>
+            <!-- //toggle button end -->
+        </div>
+    </div>
+    <!-- //sidebar menu end -->
+
+</section>
+<div class="main-content">
+
+    <!-- content -->
+    <div class="container-fluid content-top-gap">
+
+        <!-- breadcrumbs -->
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb my-breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/index_2}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Forms</li>
+            </ol>
+        </nav>
+        <!-- //breadcrumbs -->
+        <!-- forms -->
+        <div class="container mt-5">
+            <h2 class="mb-4">Admin Form</h2>
+            <form th:action="@{/save}" th:object="${admin}" method="POST">
+                <div class="form-group">
+                    <label for="adminName">Name</label>
+                    <input type="text" class="form-control" id="adminName" placeholder="Enter name" th:field="*{name}">
+                </div>
+                <div class="form-group">
+                    <label for="adminEmail">Email address</label>
+                    <input type="email" class="form-control" id="adminEmail" placeholder="Enter email" th:field="*{email}">
+                </div>
+                <div class="form-group">
+                    <label for="adminPassword">Password</label>
+                    <input type="password" class="form-control" id="adminPassword" placeholder="Password" th:field="*{password}">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+            <!-- //forms 2 -->
+
+            <!-- horizontal forms-->
+            <!-- forms 3 -->
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f9;
+                margin: 0;
+                padding: 0;
+            }
+
+            .container {
+                width: 80%;
+                margin: 50px auto;
+                padding: 20px;
+                background-color: #fff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            h1 {
+                text-align: center;
+                color: #333;
+            }
+
+            .btn-add-new {
+                display: inline-block;
+                margin-bottom: 20px;
+                padding: 10px 15px;
+                background-color: #007bff;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                text-align: center;
+            }
+
+            .btn-add-new:hover {
+                background-color: #0056b3;
+            }
+
+            .custom-table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            .custom-table thead {
+                background-color: #007bff;
+                color: #fff;
+            }
+
+            .custom-table th,
+            .custom-table td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .custom-table tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            .custom-table tr:hover {
+                background-color: #e9ecef;
+            }
+        </style>
+        </head>
+
+
+        <div class="container mt-5">
+            <h1>Admin List</h1>
+            <table class="custom-table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="admin : ${admin_3}">
+                    <td th:text="${admin.name}"></td>
+                    <td th:text="${admin.email}"></td>
+                    <td th:text="${admin.password}"></td>
+
+                    <td>
+                        <form th:action="@{edit/{id}(id=${admin.id})}" method="post">
+                            <button type="submit" class="btn btn-info">Update</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{delete/{id}(id=${admin.id})}" method="post">
+                            <input type="hidden" name="_method" value="delete" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="container mt-5">
+            <h1>Users List</h1>
+            <table class="custom-table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Age</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${user}">
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.password}"></td>
+
+                    <td>
+                        <form th:action="@{edit_2/{id}(id=${user.id})}" method="post">
+                            <button type="submit" class="btn btn-info">Update</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/delete_2/{id}(id=${user.id})}" method="post">
+                            <input type="hidden" name="_method" value="delete" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+            <!-- Bootstrap JS and dependencies -->
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    </div>
+    <!-- //content -->
+
+</div>
+
+
+
+
+<!-- main content end-->
+
+<!--footer section end-->
+<!-- move top -->
+<button onclick="topFunction()" id="movetop" class="bg-primary" title="Go to top">
+  <span class="fa fa-angle-up"></span>
+</button>
+<script>
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function () {
+    scrollFunction()
+  };
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      document.getElementById("movetop").style.display = "block";
+    } else {
+      document.getElementById("movetop").style.display = "none";
+    }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+<!-- /move top -->
+
+
+<script src="admin_js/jquery-3.3.1.min.js"></script>
+<script src="admin_js/jquery-1.10.2.min.js"></script>
+
+<!-- chart js -->
+<script src="admin_js/Chart.min.js"></script>
+<script src="admin_js/utils.js"></script>
+<!-- //chart js -->
+
+<!-- Different scripts of charts.  Ex.Barchart, Linechart -->
+<script src="admin_js/bar.js"></script>
+<script src="admin_js/linechart.js"></script>
+<!-- //Different scripts of charts.  Ex.Barchart, Linechart -->
+
+
+<script src="admin_js/jquery.nicescroll.js"></script>
+<script src="admin_js/scripts.js"></script>
+
+<!-- close script -->
+<script>
+  var closebtns = document.getElementsByClassName("close-grid");
+  var i;
+
+  for (i = 0; i < closebtns.length; i++) {
+    closebtns[i].addEventListener("click", function () {
+      this.parentElement.style.display = 'none';
+    });
+  }
+</script>
+<!-- //close script -->
+
+<!-- disable body scroll when navbar is in active -->
+<script>
+  $(function () {
+    $('.sidebar-menu-collapsed').click(function () {
+      $('body').toggleClass('noscroll');
+    })
+  });
+</script>
+<!-- disable body scroll when navbar is in active -->
+
+ <!-- loading-gif Js -->
+ <script src="admin_js/modernizr.js"></script>
+ <script>
+     $(window).load(function () {
+         // Animate loader off screen
+         $(".se-pre-con").fadeOut("slow");;
+     });
+ </script>
+ <!--// loading-gif Js -->
+
+<!-- Bootstrap Core JavaScript -->
+<script src="admin_js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

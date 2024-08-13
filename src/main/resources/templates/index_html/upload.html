@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Upload Profile Image</title>
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 33%;
+            margin: 5% auto;
+            padding: 30px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 40px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        .file-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .upload-icon {
+            width: 150px;
+            height: 150px;
+            border: 2px dashed #007bff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .upload-icon:hover {
+            background-color: #e6f0ff;
+            border-color: #0056b3;
+        }
+
+        .upload-icon i {
+            font-size: 48px;
+            color: #007bff;
+        }
+
+        .upload-icon:hover i {
+            color: #0056b3;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-name {
+            font-size: 14px;
+            color: #555555;
+            margin-bottom: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        button {
+            padding: 10px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0px 4px 15px rgba(0, 123, 255, 0.3);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            box-shadow: 0px 6px 20px rgba(0, 123, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .success-message {
+            color: green;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+         input[type="text"]{
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            width: 55%;
+        }
+
+        input[type="text"] {
+            border-color: #007bff;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #0056b3;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+<h1>Upload Profile Image</h1>
+<form th:action="@{/image_insert}" method="post" enctype="multipart/form-data">
+    <div class="file-upload">
+    <label for="name"></label>
+    <input type="text" id="name" name="name" placeholder="Enter Name" required>
+        <label class="upload-icon" for="prf_img">
+            <i class="lnr lnr-cloud-upload"></i>
+        </label>
+    <label for="prf_img"></label>
+    <input type="file" id="prf_img" name="prf_img" accept="image/*" required>
+        <div id="file-name" class="file-name">Upload Profile Photo</div>
+    <button type="submit">Upload</button>
+        <a th:href="@{/index}">Back to Home</a>
+    </div>
+</form>
+</div>
+<script>
+    function showFileName() {
+        var input = document.getElementById('image');
+        var fileName = input.files[0].name;
+        var fileNameDisplay = document.getElementById('file-name');
+        fileNameDisplay.textContent = fileName;
+    }
+</script>
+</body>
+</html>
