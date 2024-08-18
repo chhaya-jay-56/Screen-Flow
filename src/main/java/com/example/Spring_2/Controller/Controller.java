@@ -53,17 +53,19 @@ public class Controller {
         loginService.add_user(UserData);
 
         // Save the user data using the service
+//
+//        // Generate OTP
+//        String otp = otpService.generateOtp();
+//
+//        // Send OTP to user's email
+//        otpService.sendOtpEmail(UserData.getEmail(), otp);
+//
+//        // Store OTP with email and timestamp for validation
+//        otpStore.put(UserData.getEmail(), new OtpDetails(otp, LocalDateTime.now()));
 
-        // Generate OTP
-        String otp = otpService.generateOtp();
+//        return "redirect:/verify?email=" + UserData.getEmail();
 
-        // Send OTP to user's email
-        otpService.sendOtpEmail(UserData.getEmail(), otp);
-
-        // Store OTP with email and timestamp for validation
-        otpStore.put(UserData.getEmail(), new OtpDetails(otp, LocalDateTime.now()));
-
-        return "redirect:/verify?email=" + UserData.getEmail();
+        return "redirect:/log_in";
     }
 
     @PostMapping("/save_user_data_2")
@@ -81,7 +83,7 @@ public class Controller {
         return "index_html/verify";
     }
 
-    @PostMapping("/verify_otp")
+   /* @PostMapping("/verify_otp")
     @Transactional
     public String verifyOtp(@RequestParam("email") String email,String otp) {
 
@@ -113,7 +115,7 @@ public class Controller {
         }
         // OTP is invalid
         return "redirect:/error406";
-    }
+    } */
 
     @GetMapping("/log_in")
     public String log_in (Model model ){
@@ -261,22 +263,22 @@ public class Controller {
         }
     }
 
-    @PostMapping("/submit_form")
-    public String submitForm(
-            @RequestParam("name") String name,
-            @RequestParam("subject") String subject,
-            @RequestParam("sender") String senderEmail,
-            @RequestParam("phone") String phone,
-            @RequestParam("message") String message) {
-
-        String emailContent = "Name: " + name + "\n" +
-                "Email: " + senderEmail + "\n" +
-                "Phone: " + phone + "\n\n" +
-                "Message:\n" + message;
-
-        otpService.sendEmail(senderEmail, subject, emailContent);
-        return "index_html/index";
-    }
+//    @PostMapping("/submit_form")
+//    public String submitForm(
+//            @RequestParam("name") String name,
+//            @RequestParam("subject") String subject,
+//            @RequestParam("sender") String senderEmail,
+//            @RequestParam("phone") String phone,
+//            @RequestParam("message") String message) {
+//
+//        String emailContent = "Name: " + name + "\n" +
+//                "Email: " + senderEmail + "\n" +
+//                "Phone: " + phone + "\n\n" +
+//                "Message:\n" + message;
+//
+//        otpService.sendEmail(senderEmail, subject, emailContent);
+//        return "index_html/index";
+//    }
 
 
 
